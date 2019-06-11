@@ -7,8 +7,8 @@ import {Link} from 'react-router-dom';
 import Loading from '../../components/Common/Loading';
 
 export default class extends Component {
-    componentDidMount() {
-        this.props.searchActions.fetchSearchResult(this.props.location.state.searchValue);
+    componentDidMount() {   
+        this.props.searchActions.fetchSearchResult(this.props.match.params.key);
     }
 
     addFavorite(ele) {
@@ -53,7 +53,7 @@ export default class extends Component {
         }
         return (
             <div className="container">
-                <Header title={this.props.location.state.searchValue} rightIcon="icon-playlist_add" rightIconStyle={{fontSize: '24px'}} rightAction={this.playAll.bind(this)}/>
+                <Header title={this.props.match.params.key} rightIcon="icon-playlist_add" rightIconStyle={{fontSize: '24px'}} rightAction={this.playAll.bind(this)}/>
                 {
                     this.props.spin && JSON.stringify(this.props.resultList) !== '{}' ? <ul className="songList">{result}</ul> : <Loading/>
                 }

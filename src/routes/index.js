@@ -39,7 +39,7 @@ const Routes = () => (
                 <Route path="/artist/list/singer/:id" component={ArtistSinger}/>
                 <Route path="/new" component={New}/>
                 <Route path="/search" exact component={Search}/>
-                <Route path="/search/result" component={Result}/>
+                <Route path="/result/:key" component={Result}/>
                 <Route path='/user/login' component={Login}/>
                 <Route path="/user/center" component={Center}/>
                 <Route path="/user/love" component={Love}/>

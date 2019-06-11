@@ -40,14 +40,14 @@ export default class extends Component {
     }
 
     handleSearchHot(val) {
-        this.props.history.push({pathname: '/search/result', state: {searchValue: val}});
+        this.props.history.push('/result/'+val);
         this.setHistory(val);
     }
 
     handleSearch() {
         const searchValue = this.state.value.trim();
         if (searchValue !== '') {
-            this.props.history.push({pathname: '/search/result', state: {searchValue: searchValue}});
+            this.props.history.push('/result/'+searchValue);
             this.setHistory(searchValue);
         }
     }
@@ -79,9 +79,9 @@ export default class extends Component {
 
     render() {
         const hotListData = JSON.stringify(this.props.hotList) !== '{}' ? this.props.hotList.data.info : JSON.parse(localStore.getItem('hotList'));
-        const hotList = hotListData.map((ele) => {
+        const hotList = hotListData.map((ele,index) => {
             return (
-                <span key={ele.sort} onClick={() => this.handleSearchHot(ele.keyword)}>
+                <span key={index} onClick={() => this.handleSearchHot(ele.keyword)}>
                     {ele.keyword}
                 </span>
             )
