@@ -1,9 +1,9 @@
 /**
  * Created by 0easy-23 on 2017/9/28.
  */
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import request from '../../util/request';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Header from '../../components/Common/Header';
 import Loading from '../../components/Common/Loading';
 import Cheerio from 'cheerio';
@@ -33,7 +33,7 @@ export default class extends Component {
             this.setState({
                 loaded: true,
                 singerSongs: dataArr,
-                singerimg: this.props.location.state.singerimg.replace(/\{size\}/g, '400'),
+                singerimg: this.props.location.state.singerimg ? this.props.location.state.singerimg.replace(/\{size\}/g, '400') : "",
                 singername: this.props.location.state.singername
             })
         })
@@ -44,8 +44,8 @@ export default class extends Component {
         for (let i = 0; i < singerSongs.length; i++) {
             this.props.musicInfoActions.fetchMusic(singerSongs[i].split('|')[1]);
         }
-        this.props.musicInfoActions.getMusic({hash: singerSongs[0].split('|')[1]});
-        this.props.musicInfoActions.control({playing: true});
+        this.props.musicInfoActions.getMusic({ hash: singerSongs[0].split('|')[1] });
+        this.props.musicInfoActions.control({ playing: true });
         this.props.history.push(`/play/#${singerSongs[0].split('|')[1]}`);
     }
 
@@ -69,7 +69,7 @@ export default class extends Component {
     // }
 
     addFavorite(ele) {
-        const hash  = ele.split('|')[1];
+        const hash = ele.split('|')[1];
         const filename = ele.split('|')[0];
         const currentEle = this.refs[hash];
         if (currentEle.style.color === '') {
@@ -82,7 +82,7 @@ export default class extends Component {
     }
 
     setStyle(hash) {
-        return this.props.favoriteMusic.length > 0 && this.props.favoriteMusic.toString().indexOf(hash) >= 0 ? {color: 'rgb(233, 32, 61)'} : {color: ''};
+        return this.props.favoriteMusic.length > 0 && this.props.favoriteMusic.toString().indexOf(hash) >= 0 ? { color: 'rgb(233, 32, 61)' } : { color: '' };
     }
 
     render() {
