@@ -8,14 +8,15 @@ const parseLyric = (text) => {
         result = [];
     // 去掉数组中最后的空白;
     lines[lines.length - 1].length === 0 && lines.pop();
-
-    lines.map((ele) => {
-        let time = ele.match(pattern),
-            value = ele.replace(pattern, '');
-        time.map((e) => {
-            let t = e.slice(1, -1).split(':');
-            result.push([parseInt(t[0], 10) * 60 + parseFloat(t[1]), value]);
-        })
+    lines.forEach((ele) => {
+        if (pattern.test(ele)) {
+            let time = ele.match(pattern),
+                value = ele.replace(pattern, '');
+            time.map((e) => {
+                let t = e.slice(1, -1).split(':');
+                result.push([parseInt(t[0], 10) * 60 + parseFloat(t[1]), value]);
+            })
+        }
     });
 
     // 最后将结果数组中的元素按时间大小排序，以便保存之后正常显示歌词;
@@ -30,7 +31,7 @@ const formatTime = (timeTemp) => {
 };
 // 时间戳转时间格式
 const getLocalTime = (nS) => {
-    return new Date(parseInt(nS) * 1000).toLocaleString('chinese', {hour12: false}).replace(/\//g, '-');
+    return new Date(parseInt(nS) * 1000).toLocaleString('chinese', { hour12: false }).replace(/\//g, '-');
 };
 // 数组去重
 const unique = (arr) => {
@@ -44,4 +45,4 @@ const unique = (arr) => {
     }
     return res;
 };
-export {parseLyric, formatTime, getLocalTime, unique};
+export { parseLyric, formatTime, getLocalTime, unique };
