@@ -54,7 +54,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      title: 'demo',
+      title: 'react-music',
       template: './templates/index.html',
       favicon: './src/static/images/favicon.ico',
       inject: 'body'
